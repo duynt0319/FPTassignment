@@ -2,9 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package assesement.pkg01;
+package assesement.pkg01.subject;
 
+import assesement.pkg01.checkValidation.CheckValidInformation;
 import assesement.pkg01.comparartor.SubjectNameComparator;
+import assesement.pkg01.grade.GradeService;
 
 import java.util.*;
 
@@ -136,46 +138,15 @@ public class SubjectService {
             }
         }
     }
-
-    //    public void updatingStudent() {
-//        String studentId = inputStudentId();
-//        printStudentExistOrNot(studentId);
-//        boolean flag = isExistStudentInHashMap(studentId);
-//        if (flag == true) {
-//            miniMenuForUpdateStudent();
-//            String optionUpdateOrDelete = optionUpdateOrDelete();
-//            switch (optionUpdateOrDelete) {
-//                case "1":
-//                    updateStudent(studentId);
-//                    backToTheUpdateMenu();
-//                    break;
-//                case "2":
-//                    confirmDelete(studentId);
-//                    break;
-//                case "3":
-//                    break;
-//            }
-//        }
-//    }
-//    public void updateOrDelete(String choice, String subjectId){
-//        switch (choice) {
-//                case "1":
-//                    updateSubject(subjectId);
-//                    backToTheUpdateMenu();
-//                    break;
-//                case "2":
-//                    confirmDelete(subjectId);
-//                case "3":
-//                    break;
-//        }
-//    }
     public void confirmDelete(String subjectId) {
         System.out.println("Do you really want to delete this subject (Y/N)");
         System.out.print("Please choose (Y/N): ");
         String choose = sc.nextLine().toUpperCase();
+        final GradeService gradeService = new GradeService();
         switch (choose) {
             case "Y":
                 removeSubject(subjectId);
+                gradeService.removeSubject(subjectId);
                 System.out.println("Delete success");
                 backToTheUpdateMenu();
 

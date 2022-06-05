@@ -2,9 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package assesement.pkg01;
+package assesement.pkg01.student;
 
+import assesement.pkg01.checkValidation.CheckValidInformation;
 import assesement.pkg01.comparartor.StudentNameComparator;
+import assesement.pkg01.grade.GradeService;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -172,19 +174,25 @@ public class StudentService {
     private Date tesstdate() {
         Date date = new Date();
 
+        Date currentDate = new Date();
+        boolean isInputCorrectDate = true;
         do {
             try {
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
                 System.out.print("Please input a date of birth student: format:(dd/MM/yyyy): ");
                 String input = sc.nextLine();
                 date = simpleDateFormat.parse(input);
-                if (!input.trim().equals(" ")) {
-                    break;
+
+                if (date.after(currentDate)) {
+                    System.out.println("Please input date before current date");
+                } else {
+                    isInputCorrectDate = false;
                 }
+
             } catch (ParseException e) {
                 System.out.println("your input must be valid! Please input again!!");
             }
-        } while (true);
+        } while (isInputCorrectDate);
 
         return date;
     }
@@ -278,9 +286,12 @@ public class StudentService {
             System.out.println("Do you really want to delete this student (Y/N)");
             System.out.print("Please choose (Y/N): ");
             String choose = sc.nextLine().toUpperCase();
+            final GradeService gradeService
+                    = new GradeService();
             switch (choose) {
                 case "Y":
                     deleteStudent(studentId);
+                    gradeService.removeStudent(studentId);
                     System.out.println("Delete success");
                     backToTheUpdateMenu();
                     break;

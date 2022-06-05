@@ -1,6 +1,6 @@
 package assesement.pkg01.comparartor;
 
-import assesement.pkg01.Subject;
+import assesement.pkg01.subject.Subject;
 
 import java.util.Comparator;
 import java.util.Map;

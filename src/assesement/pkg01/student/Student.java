@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
-package assesement.pkg01;
+package assesement.pkg01.student;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

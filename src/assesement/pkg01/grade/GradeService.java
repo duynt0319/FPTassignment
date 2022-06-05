@@ -2,7 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package assesement.pkg01;
+package assesement.pkg01.grade;
+
+import assesement.pkg01.student.StudentService;
+import assesement.pkg01.subject.SubjectService;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -244,4 +247,13 @@ public class GradeService {
         }
     }
 
+    public void removeStudent(String studentId) {
+        studentIdMapWithSubjectIdMapWithGrade.remove(studentId);
+    }
+
+    public void removeSubject(String subjectId) {
+        for (String studentId: studentIdMapWithSubjectIdMapWithGrade.keySet()) {
+            studentIdMapWithSubjectIdMapWithGrade.get(studentId).remove(subjectId);
+        }
+    }
 }

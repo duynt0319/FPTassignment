@@ -2,7 +2,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package assesement.pkg01;
+package assesement.pkg01.report;
+
+import assesement.pkg01.grade.Grade;
+import assesement.pkg01.grade.GradeService;
+import assesement.pkg01.student.StudentService;
+import assesement.pkg01.subject.Subject;
+import assesement.pkg01.subject.SubjectService;
 
 import java.util.Map;
 import java.util.Scanner;
