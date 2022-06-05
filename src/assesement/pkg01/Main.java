@@ -33,7 +33,7 @@ public class Main {
             switch (choice) {
                 case 1 :
                     studentService.createStudent();
-                    studentService.showContinuteCreating();
+                    studentService.showContinueCreating();
                     break;
 
                 case 2 :

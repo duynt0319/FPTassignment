@@ -123,46 +123,20 @@ public class GradeService {
         enterNewGrade(studentIdInput, subjectIdInput);
 
     }
-
-//    public void checkingAndREnteringGrade() {
-//        String inputIdStudent = inputStudentId();
-//        boolean flag = studentService.isExistStudentInHashMap(inputIdStudent);
-//        if (flag == true) {
-//            String inputIdSubject = inputSubjectId();
-//            boolean flagTwo = subjectService.isExistSubjectInHashMap(inputIdSubject);
-//            if (flagTwo == true) {
-//                enterNewGrade(inputIdStudent, inputIdSubject);
-//
-////                Map<String, Grade> subjectIdMapWithGrade = studentIdMapWithSubjectIdMapWithGrade.get(studentIdInput);
-//                subjectIdMapWithGrade = studentIdMapWithSubjectIdMapWithGrade.get(inputIdStudent);
-//                Grade grade = subjectIdMapWithGrade.get(inputIdSubject);
-//                if (grade != null) {
-//                    boolean isOverWritingGradeOrNot = isOverWritingGradeOrNot();
-//                    if (isOverWritingGradeOrNot) {
-//
-//                    }
-//                }
-//            } else {
-//                System.out.println("Subject does not exist!!!!");
-//            }
-//        } else {
-//            System.out.println("Student does not exist!!!!");
-//        }
-//    }
     private boolean isOverWritingGradeOrNot() {
         System.out.println("Your Grade is already EXIST! Do you want overwrite it or not?"
                 + "(Y/N): ");
-        String input = sc.next().toUpperCase();
+        String input = sc.nextLine().toUpperCase();
         return "Y".equals(input);
     }
 
     private double inputGradeOfProgessTests() {
-        double ProgessTestsGrade;
+        double progessTestsGrade;
         do {
             try {
                 System.out.print("Please input Progess Tests Grade: ");
-                ProgessTestsGrade = Double.parseDouble(sc.nextLine());
-                if (ProgessTestsGrade >= 0 && ProgessTestsGrade <= 10) {
+                progessTestsGrade = Double.parseDouble(sc.nextLine());
+                if (progessTestsGrade >= 0 && progessTestsGrade <= 10) {
                     break;
                 } else {
                     System.out.println("input number from 1-10!");
@@ -171,7 +145,7 @@ public class GradeService {
                 System.out.println("your input must be valid! Please input credit again!!");
             }
         } while (true);
-        return ProgessTestsGrade;
+        return progessTestsGrade;
     }
 
     private double inputGradeOfFinalExam() {

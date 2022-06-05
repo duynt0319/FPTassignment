@@ -20,13 +20,13 @@ public class ShowGradeService {
     
     private String inputStudentId() {
         System.out.print("Please input student ID: ");
-        String inputStudentId = sc.next();
+        String inputStudentId = sc.nextLine();
         return inputStudentId;
     }
     
     private String inputSubjectId() {
         System.out.print("Please input subject ID: ");
-        String inputSubjectId = sc.next();
+        String inputSubjectId = sc.nextLine();
         return inputSubjectId;
     }
     
@@ -52,16 +52,19 @@ public class ShowGradeService {
             }       
             System.out.println("-StudentID " + studentIdInput);
             System.out.println("-Student name: " + studentService.getNameOfStudentById(studentIdInput));
-//        System.out.println("List of subject sort by Subject Name:");
+            System.out.println("List of subject sort by Subject Name:");
             System.out.println("| ++No++ | +++++++Subject name+++++++ | ++Average mark++ | ++Status++ |");
             Map<String, Grade> subjectsAndGradeByStudentID = gradeService.getSubjectsNameAndGradeByStudentID(studentIdInput);
+
+            Map<String, Subject> studentIdMapWithSubjectName = subjectService
+                    .sortSubjectName(subjectsAndGradeByStudentID.keySet());
             int count = 1;
-            for (String studentId : subjectsAndGradeByStudentID.keySet()) {
+            for (String subjectId : studentIdMapWithSubjectName.keySet()) {
                 System.out.format("|%5d   | %20s       | %f         |  %s     |\n",
                         count,
-                        subjectService.getSubjectNameBySubjectId(studentId),
-                        gradeService.getAverageBySubjectId(studentIdInput, studentId),
-                        gradeService.getStatus(studentIdInput, studentId)
+                        studentIdMapWithSubjectName.get(subjectId).getSubJectName(),
+                        gradeService.getAverageBySubjectId(studentIdInput, subjectId),
+                        gradeService.getStatus(studentIdInput, subjectId)
                 );
                 count++;
                 
@@ -81,7 +84,8 @@ public class ShowGradeService {
                 System.out.println("Subject does not exist!");
                 return;
             }
-             Map<String, Grade> studentIdAndStudentNameBySubjectID = gradeService.getStudentIdAndStudentNameBySubjectID(subjectIdInput);
+            Map<String, Grade> studentIdAndStudentNameBySubjectID = gradeService.getStudentIdAndStudentNameBySubjectID(subjectIdInput);
+            Map<String, String> sortByStudentName = studentService.sortByStudentName(studentIdAndStudentNameBySubjectID.keySet());
             if (studentIdAndStudentNameBySubjectID.isEmpty()) {
                 System.out.println("No students have taken "+subjectIdInput +" yet! please try again!");
                 return;
@@ -92,7 +96,7 @@ public class ShowGradeService {
             System.out.println("|++Student ID++|++++++Student name++++++|++Average mark++|++Status++|");
            
             
-            for (String studentId : studentIdAndStudentNameBySubjectID.keySet()) {
+            for (String studentId : sortByStudentName.keySet()) {
                 System.out.format("|%14s|%24s|%9.2f       |%10s|\n",
                         studentId,
                         studentService.getNameOfStudentById(studentId),

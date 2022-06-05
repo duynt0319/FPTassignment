@@ -4,9 +4,9 @@
  */
 package assesement.pkg01;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+import assesement.pkg01.comparartor.SubjectNameComparator;
+
+import java.util.*;
 
 /**
  *
@@ -84,7 +84,7 @@ public class SubjectService {
         String name;
         boolean flag;
         do {
-            System.out.print("Please input student's subject name: ");
+            System.out.print("Please input subject name: ");
             name = sc.nextLine();
             if (name == null || name.isEmpty()) {
                 System.out.println("your input must be valid! Please input subject name again!!");
@@ -172,7 +172,7 @@ public class SubjectService {
     public void confirmDelete(String subjectId) {
         System.out.println("Do you really want to delete this subject (Y/N)");
         System.out.print("Please choose (Y/N): ");
-        String choose = sc.next().toUpperCase();
+        String choose = sc.nextLine().toUpperCase();
         switch (choose) {
             case "Y":
                 removeSubject(subjectId);
@@ -205,13 +205,13 @@ public class SubjectService {
 
     private String inputSubjectId() {
         System.out.print("Please enter the subject ID: ");
-        String inputId = sc.next();
+        String inputId = sc.nextLine().toUpperCase();
         return inputId;
     }
 
     private String optionDeleteOrUpdate() {
         System.out.print("PLEASE ENTER YOUR CHOICE:");
-        String option = sc.next();
+        String option = sc.nextLine();
         return option;
     }
 
@@ -234,7 +234,7 @@ public class SubjectService {
     private String optionBackToTheUpdateMenu() {
         System.out.println("Do you want to go back to the ''update menu''?");
         System.out.print("Please choose (Y/N): ");
-        String chooseBackToTheUpdateMenu = sc.next().toUpperCase();
+        String chooseBackToTheUpdateMenu = sc.nextLine().toUpperCase();
         return chooseBackToTheUpdateMenu;
     }
 
@@ -260,7 +260,7 @@ public class SubjectService {
         do {
             System.out.println("Do you want to continuous create new subject or go back to the main menu:");
             System.out.print("Choose [Y/N]: ");
-            String continuousOrGoBack = sc.next().toUpperCase();
+            String continuousOrGoBack = sc.nextLine().toUpperCase();
             switch (continuousOrGoBack) {
                 case "Y":
                     createSubject();
@@ -274,4 +274,15 @@ public class SubjectService {
         } while (checkTrueFlase);
     }
 
+    public Map<String, Subject> sortSubjectName(Set<String> subjectIds) {
+        Map<String, Subject> subjectIdMapWithSubject = new HashMap<>();
+
+        for (String subjectId: subjectIds) {
+            subjectIdMapWithSubject.put(subjectId, mySubject.get(subjectId));
+        }
+        SubjectNameComparator subjectNameComparator = new SubjectNameComparator(subjectIdMapWithSubject);
+        TreeMap<String, Subject> sortedBySubjectName = new TreeMap<>(subjectNameComparator);
+        sortedBySubjectName.putAll(subjectIdMapWithSubject);
+        return sortedBySubjectName;
+    }
 }

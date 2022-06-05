@@ -4,13 +4,11 @@
  */
 package assesement.pkg01;
 
+import assesement.pkg01.comparartor.StudentNameComparator;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Formatter;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 import java.util.regex.Pattern;
 
 /**
@@ -160,7 +158,7 @@ public class StudentService {
         while (isContinue) {
             try {
                 System.out.print("Please input a date of birth student: format:(MM/DD/YY) ");
-                String dateOfBirth = sc.next();
+                String dateOfBirth = sc.nextLine();
                 result = new Date(dateOfBirth);
                 isContinue = false;
 
@@ -221,12 +219,12 @@ public class StudentService {
         return phoneNumber;
     }
 
-    public void showContinuteCreating() {
+    public void showContinueCreating() {
         boolean checkTrueFlase = true;
         do {
             System.out.println("Do you want to continuous create new student or go back to the main menu:");
             System.out.print("Choose [Y/N]: ");
-            String continuousOrGoBack = sc.next().toUpperCase();
+            String continuousOrGoBack = sc.nextLine().toUpperCase();
             switch (continuousOrGoBack) {
                 case "Y":
                     createStudent();
@@ -279,7 +277,7 @@ public class StudentService {
         do {
             System.out.println("Do you really want to delete this student (Y/N)");
             System.out.print("Please choose (Y/N): ");
-            String choose = sc.next().toUpperCase();
+            String choose = sc.nextLine().toUpperCase();
             switch (choose) {
                 case "Y":
                     deleteStudent(studentId);
@@ -299,14 +297,13 @@ public class StudentService {
 
     private String inputStudentId() {
         System.out.print("Please enter the student ID: ");
-        String inputId = sc.next();
+        String inputId = sc.nextLine();
         return inputId;
     }
 
     private String optionUpdateOrDelete() {
         System.out.print("PLEASE ENTER YOUR CHOICE:");
-        String option = sc.next();
-        return option;
+        return sc.nextLine();
     }
 
     private void deleteStudent(String studentIdd) {
@@ -345,7 +342,7 @@ public class StudentService {
     private String optionBackToTheUpdateMenu() {
         System.out.println("Do you want to go back to the ''update menu''?");
         System.out.print("Please choose (Y/N): ");
-        String chooseBackToTheUpdateMenu = sc.next().toUpperCase();
+        String chooseBackToTheUpdateMenu = sc.nextLine().toUpperCase();
         return chooseBackToTheUpdateMenu;
     }
 
@@ -364,5 +361,17 @@ public class StudentService {
                 System.out.println("This is your main menu");
                 break;
         }
+    }
+
+    public Map<String, String> sortByStudentName(Set<String> studentIds) {
+        Map<String, String> studentIdAndStudentName = new HashMap<>();
+        for (String studentId: studentIds) {
+            studentIdAndStudentName.put(studentId, getNameOfStudentById(studentId));
+        }
+
+        StudentNameComparator studentNameComparator = new StudentNameComparator(studentIdAndStudentName);
+        Map<String, String> sortByStudentName = new TreeMap<>(studentNameComparator);
+        sortByStudentName.putAll(studentIdAndStudentName);
+        return sortByStudentName;
     }
 }
