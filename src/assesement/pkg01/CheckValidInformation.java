@@ -19,7 +19,7 @@ public class CheckValidInformation {
     }
     
     public void checkNull(String input){    
-            if (input == null || input.isBlank() || input.isEmpty()) {
+            if (input == null || input.isEmpty()) {
                 System.out.println("your input must be valid! Please icheck again!!"); 
             }
     }

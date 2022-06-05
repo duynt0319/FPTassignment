@@ -68,7 +68,7 @@ public class GradeService {
 
         System.out.print("Please input student ID: ");
         String inputStudentId = sc.nextLine();
-        while (inputStudentId == null || inputStudentId.isBlank() || inputStudentId.isEmpty()) {
+        while (inputStudentId == null || inputStudentId.isEmpty()) {
             System.out.print("your input is wrong! Please try again!: ");
             inputStudentId = sc.nextLine();
         }
@@ -79,7 +79,7 @@ public class GradeService {
 
         System.out.print("Please input subject ID: ");
         String inputSubjectId = sc.nextLine();
-        while (inputSubjectId == null || inputSubjectId.isBlank() || inputSubjectId.isEmpty()) {
+        while (inputSubjectId == null || inputSubjectId.isEmpty()) {
             System.out.print("your input is wrong! Please try again!: ");
             inputSubjectId = sc.nextLine();
         }

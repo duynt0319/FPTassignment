@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package assesement.pkg01;
 
 import java.util.Scanner;
@@ -35,39 +31,46 @@ public class Main {
             } while (true);
 
             switch (choice) {
-                case 1 -> {
+                case 1 :
                     studentService.createStudent();
                     studentService.showContinuteCreating();
-                }
-                case 2 -> {
+                    break;
+
+                case 2 :
                     studentService.updatingStudent();
-                }
-                case 3 -> {
+                    break;
+
+                case 3 :
                     subjectService.createSubject();
                     subjectService.showContinuteCreating();
-                }
-                case 4 -> {
+                    break;
+
+                case 4 :
                     subjectService.updatingSubject();
-                }
-                case 5 -> {
+                    break;
+
+                case 5 :
                     gradeService.enterStudentGrade();
                     gradeService.test();
-                }
-                case 6 -> {
+                    break;
+
+                case 6 :
                     soutGrade.studentGradeReport();
-                }
-                case 7 -> {
+                    break;
+
+                case 7 :
                     soutGrade.subjectGradeReport();
-                }
-                case 8 -> {
+                    break;
+
+                case 8 :
                     System.out.println("Completed program, see u again!");
-                    return;
-                }
-                case 9 -> {
+                    break;
+
+                case 9 :
                     studentService.showStudent();
                     subjectService.showSubject();
                     gradeService.showGrade();
-                }
+
             }
         }
     }

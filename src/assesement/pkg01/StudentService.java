@@ -77,7 +77,7 @@ public class StudentService {
             do {
                 System.out.print("Please input a student ID (ex: SE160821): ");
                 studentId = sc.nextLine().trim().toUpperCase();
-                if (studentId == null || studentId.isBlank() || studentId.isEmpty()) {
+                if (studentId == null || studentId.isEmpty()) {
                     System.out.println("your input must be valid! Please input again!!");
                     flag = true;
                 } else if (checkValidInformation.checkStudentIdValid(studentId)) {
@@ -103,7 +103,7 @@ public class StudentService {
         do {
             System.out.print("Please input student's first name: ");
             firstName = sc.nextLine();
-            if (firstName == null || firstName.isBlank() || firstName.isEmpty()) {
+            if (firstName == null || firstName.isEmpty()) {
                 System.out.println("your input must be valid! Please input first name again!!");
                 flag = true;
             } else {
@@ -120,7 +120,7 @@ public class StudentService {
         do {
             System.out.print("Please input student's last name: ");
             lastName = sc.nextLine();
-            if (lastName == null || lastName.isBlank() || lastName.isEmpty()) {
+            if (lastName == null || lastName.isEmpty()) {
                 System.out.println("your input must be valid! Please input last name again!!");
                 flag = true;
             } else {
@@ -136,7 +136,7 @@ public class StudentService {
             System.out.println("Please input student's gender: (Male or Female)");
             System.out.print("Please choose (M/F): ");
             String choose = sc.nextLine().toUpperCase();
-            if (choose == null || choose.isBlank() || choose.isEmpty()) {
+            if (choose == null || choose.isEmpty()) {
                 System.out.println("your input must be valid! Please input last name again!!");
                 flag = true;
             } else {

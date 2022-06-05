@@ -65,7 +65,7 @@ public class SubjectService {
             while (true) {
                 System.out.print("Please input a subject ID: ");
                 subjectId = sc.nextLine().toUpperCase();
-                if (subjectId == null || subjectId.isBlank() || subjectId.isEmpty()) {
+                if (subjectId == null || subjectId.isEmpty()) {
                     System.out.println("your input must be valid! Please input subject name again!!");
                 } else {
                     break;
@@ -86,7 +86,7 @@ public class SubjectService {
         do {
             System.out.print("Please input student's subject name: ");
             name = sc.nextLine();
-            if (name == null || name.isBlank() || name.isEmpty()) {
+            if (name == null || name.isEmpty()) {
                 System.out.println("your input must be valid! Please input subject name again!!");
                 flag = true;
             } else {
