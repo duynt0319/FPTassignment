@@ -2,11 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package assesement.pkg01.student;
+package student;
 
-import assesement.pkg01.checkValidation.CheckValidInformation;
-import assesement.pkg01.comparartor.StudentNameComparator;
-import assesement.pkg01.grade.GradeService;
+import checkValidation.CheckValidInformation;
+import comparartor.StudentNameComparator;
+import grade.GradeService;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -22,29 +22,12 @@ public class StudentService {
     private static Map<String, Student> myStudents = new HashMap<>();
     private Scanner sc = new Scanner(System.in);
 
-    static {
-        Student student = new Student("DUY", "firstName", "lastName", "gender", new Date(), "email", "phoneNumber");
-        myStudents.put("DUY", student);
-    }  //testttttttttttttttttttttttttttttttttttttttttt
 
-    static {
-        Student student = new Student("KHANG", "firstName", "lastName", "gender", new Date(), "email", "phoneNumber");
-        myStudents.put("KHANG", student);
-    }
-
-    public void showStudent() {
-        System.out.println(myStudents);
-    }
-
-    public String getNameOfStudentById(String studentID) {
+    public String getFNameAndLNameOfStudentById(String studentID) {
         Student student = myStudents.get(studentID);
         return student.getFirstName() + " " + student.getLastName();
     }
 
-//    public Student getStudentByStudentId(String studentID) {
-//        return myStudents.get(studentID);
-//    }
-    //function1
     public void createStudent() {
 
         String studentId = inputIdStudent();
@@ -55,7 +38,7 @@ public class StudentService {
 
         String gender = inputGender();
 
-        Date dob = tesstdate();
+        Date dob = validDate();
 
         String email = inputEmail();
 
@@ -97,7 +80,6 @@ public class StudentService {
     }
 
     private String inputFirstName() {
-//        Scanner sc = new Scanner(System.in);
         String firstName;
         boolean flag;
         do {
@@ -114,7 +96,7 @@ public class StudentService {
     }
 
     private String inpuLastName() {
-//        Scanner sc = new Scanner(System.in);
+
         String lastName;
         boolean flag;
         do {
@@ -154,24 +136,9 @@ public class StudentService {
         return null;
     }
 
-    private Date validateDate() {
-        Date result = new Date();
-        boolean isContinue = true;
-        while (isContinue) {
-            try {
-                System.out.print("Please input a date of birth student: format:(MM/DD/YY) ");
-                String dateOfBirth = sc.nextLine();
-                result = new Date(dateOfBirth);
-                isContinue = false;
+    
 
-            } catch (Exception e) {
-                System.out.println("Your input is wrong! Please input date of birth again!: ");
-            }
-        }
-        return result;
-    }
-
-    private Date tesstdate() {
+    private Date validDate() {
         Date date = new Date();
 
         Date currentDate = new Date();
@@ -245,7 +212,7 @@ public class StudentService {
         } while (checkTrueFlase);
     }
 
-    //if stdId in HashMAp return true else false
+ 
     public boolean isExistStudentInHashMap(String studentId) {
         return myStudents.containsKey(studentId);
     }
@@ -258,7 +225,7 @@ public class StudentService {
         }
     }
 
-    // UPDATE FUNCTION 
+
     public void updatingStudent() {
         String studentId = inputStudentId().toUpperCase();
         printStudentExistOrNot(studentId);
@@ -286,11 +253,9 @@ public class StudentService {
             System.out.println("Do you really want to delete this student (Y/N)");
             System.out.print("Please choose (Y/N): ");
             String choose = sc.nextLine().toUpperCase();
-            final GradeService gradeService
-                    = new GradeService();
+            final GradeService gradeService = new GradeService();
             switch (choose) {
                 case "Y":
-                    deleteStudent(studentId);
                     gradeService.removeStudent(studentId);
                     System.out.println("Delete success");
                     backToTheUpdateMenu();
@@ -316,21 +281,32 @@ public class StudentService {
         System.out.print("PLEASE ENTER YOUR CHOICE:");
         return sc.nextLine();
     }
-
-    private void deleteStudent(String studentIdd) {
-        myStudents.remove(studentIdd);
+    
+     private String inputFirstName1() {
+        String firstName;
+            System.out.print("Please input student's first name: ");
+            firstName = sc.nextLine();
+        return firstName;
+    }
+     private String getFirstNameByStudentId(String studentID) {
+        Student student = myStudents.get(studentID);
+        return student.getFirstName();
     }
 
     private void updateStudent(String Id) {
 
-        String firstName = inputFirstName();
+        String firstName = inputFirstName1();
+        if (firstName == null || firstName.isEmpty()) {
+            System.out.println("keep old value"); 
+            getFirstNameByStudentId(Id); 
+        }
+       
 
         String lastName = inpuLastName();
 
         String gender = inputGender();
 
-        // Date dob = validateDate();
-        Date dob = tesstdate();
+        Date dob = validDate();
 
         String email = inputEmail();
 
@@ -342,6 +318,10 @@ public class StudentService {
         System.out.println("Update Success!!");
     }
 
+    public void showStudent() {
+        System.out.println(myStudents);
+    }
+    
     private void miniMenuForUpdateStudent() {
         System.out.println("THIS IS A UPDATE MENU");
         System.out.println("--------------- MENU--------------");
@@ -377,7 +357,7 @@ public class StudentService {
     public Map<String, String> sortByStudentName(Set<String> studentIds) {
         Map<String, String> studentIdAndStudentName = new HashMap<>();
         for (String studentId: studentIds) {
-            studentIdAndStudentName.put(studentId, getNameOfStudentById(studentId));
+            studentIdAndStudentName.put(studentId, getFNameAndLNameOfStudentById(studentId));
         }
 
         StudentNameComparator studentNameComparator = new StudentNameComparator(studentIdAndStudentName);

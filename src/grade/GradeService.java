@@ -2,21 +2,19 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package assesement.pkg01.grade;
+package grade;
 
-import assesement.pkg01.student.StudentService;
-import assesement.pkg01.subject.SubjectService;
+import student.StudentService;
+import subject.SubjectService;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
 public class GradeService {
-//    private static Map<String, Grade> myGrade = new HashMap<>();
-//    Map<String, Grade> subjectIdMapWithGrade = new HashMap<>();
 
     private static Map<String, Map<String, Grade>> studentIdMapWithSubjectIdMapWithGrade = new HashMap<>();
-//    Map<String, Grade> subjectIdMapWithGrade = new HashMap<>();
+
     private Scanner sc = new Scanner(System.in);
 
     StudentService studentService = new StudentService();
@@ -30,16 +28,6 @@ public class GradeService {
         return studentIdMapWithSubjectIdMapWithGrade.containsKey(subjectID);
     }
 
-//    public boolean checkIsGradeExist(String subjectID) {
-////          Map<String, Grade> map = new HashMap<>();
-//        for (String studentId : studentIdMapWithSubjectIdMapWithGrade.keySet()) {
-//            Map<String, Grade> subjectWithGrade = studentIdMapWithSubjectIdMapWithGrade.get(studentId);
-//            if (subjectWithGrade.containsKey(subjectID)) {
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
     public Map<String, Grade> getStudentIdAndStudentNameBySubjectID(String subjectID) {
         Map<String, Grade> map = new HashMap<>();
         for (String studentId : studentIdMapWithSubjectIdMapWithGrade.keySet()) {
@@ -63,9 +51,6 @@ public class GradeService {
         return "Not pass!";
     }
 
-    public void showGrade() {
-        System.out.println(studentIdMapWithSubjectIdMapWithGrade);
-    }
 
     private String inputStudentId() {
 
@@ -93,17 +78,9 @@ public class GradeService {
         return studentIdMapWithSubjectIdMapWithGrade.containsKey(studentId);
     }
 
-    public void test() {
-        System.out.println(studentIdMapWithSubjectIdMapWithGrade);
-    } //testtttttttttttttttttttttttttttttttttt
 
     public void enterStudentGrade() {
-        //1. user input studentID
-        //1.1 sever check studentID is exist or not
-        //    a if studentID not exit show message, return;
-        //2. user input subjectID
-        //2.1 sever check subjectID is exist or not
-        //    a. if subjectId not exit show message, return;
+
         String studentIdInput = inputStudentId().toUpperCase();
         boolean isStudentIdExist = studentService.isExistStudentInHashMap(studentIdInput);
         if (isStudentIdExist == false) {
@@ -118,7 +95,7 @@ public class GradeService {
             return;
         }
 
-        if (isOverwritingGrade(subjectIdInput, studentIdInput)) {
+        if (checkInputIsExitOrNot(subjectIdInput, studentIdInput)) {
             overWriteGrade(studentIdInput, subjectIdInput);
             return;
         }
@@ -187,20 +164,11 @@ public class GradeService {
         return gradeOfLabs;
     }
 
-//    public boolean isOverwritingGrade(String subjectId, String studentId) {
-//        Map<String, Grade> subjectIdMapWithGrade = studentIdMapWithSubjectIdMapWithGrade.get(studentId);
-//        Grade grade = subjectIdMapWithGrade.get(subjectId);
-//        return grade.equals(subjectId);
-//    }
-//    public boolean isEisOverwritingGradering studentId) {
-//
-//        return studentIdMapWithSubjectIdMapWithGrade.containsKey(studentId);
-//    }
     private boolean isStudentIdExistInMyGrade(String studentId) {
         return studentIdMapWithSubjectIdMapWithGrade.containsKey(studentId);
     }
 
-    private boolean isOverwritingGrade(String subjectId, String studentId) {
+    private boolean checkInputIsExitOrNot(String subjectId, String studentId) {
         if (isStudentIdExistInMyGrade(studentId)) {
             Map<String, Grade> subjectIdMapWithGrade = studentIdMapWithSubjectIdMapWithGrade.get(studentId);
             return subjectIdMapWithGrade.containsKey(subjectId);
@@ -213,8 +181,6 @@ public class GradeService {
         double labs = inputGradeOfLabs();
         double progressTest = inputGradeOfProgessTests();
         double finalExam = inputGradeOfFinalExam();
-
-//        Grade grade = new Grade(labs, progressTest, finalExam);
         Grade grade = new Grade(labs, progressTest, finalExam);
 
         Map<String, Grade> subjectIdMapWithGrade;
@@ -233,7 +199,6 @@ public class GradeService {
         boolean choice = isOverWritingGradeOrNot();
         if (choice == true) {
             Map<String, Grade> subjectIdMapWithGrade = studentIdMapWithSubjectIdMapWithGrade.get(studentId);
-//        subjectIdMapWithGrade = studentIdMapWithSubjectIdMapWithGrade.get(subjectId);
 
             double labs = inputGradeOfLabs();
             double progressTest = inputGradeOfProgessTests();

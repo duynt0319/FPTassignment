@@ -2,11 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package assesement.pkg01.subject;
+package subject;
 
-import assesement.pkg01.checkValidation.CheckValidInformation;
-import assesement.pkg01.comparartor.SubjectNameComparator;
-import assesement.pkg01.grade.GradeService;
+import checkValidation.CheckValidInformation;
+import comparartor.SubjectNameComparator;
+import grade.GradeService;
 
 import java.util.*;
 
@@ -19,15 +19,6 @@ public class SubjectService {
     private static Map<String, Subject> mySubject = new HashMap<>();
     private Scanner sc = new Scanner(System.in);
 
-    static {
-        Subject subject = new Subject("toan cap cap", "subJectName", 9);
-        mySubject.put("TOAN", subject);
-    } //testttttttttttttttttttttttttttttttttttttt
-
-    static {
-        Subject subject = new Subject("ky nang lam vie nhom", "subJectName", 7);
-        mySubject.put("SSL", subject);
-    }
 
     CheckValidInformation checkValidInformation = new CheckValidInformation();
 
@@ -36,9 +27,6 @@ public class SubjectService {
         return subject.getSubJectName();
     }
 
-    public void showSubject() {
-        System.out.println(mySubject);
-    }
 
     public String getSubjectNameBySubjectId(String subjectId) {
         return mySubject.get(subjectId).getSubJectName();
@@ -63,7 +51,7 @@ public class SubjectService {
         boolean isExistSubjectId;
         String subjectId;
         do {
-//            checkValidInformation.checkNull(subjectId);
+
             while (true) {
                 System.out.print("Please input a subject ID: ");
                 subjectId = sc.nextLine().toUpperCase();
@@ -145,7 +133,6 @@ public class SubjectService {
         final GradeService gradeService = new GradeService();
         switch (choose) {
             case "Y":
-                removeSubject(subjectId);
                 gradeService.removeSubject(subjectId);
                 System.out.println("Delete success");
                 backToTheUpdateMenu();
@@ -170,9 +157,6 @@ public class SubjectService {
         return mySubject.containsKey(subjectId);
     }
 
-    private void removeSubject(String subjectId) {
-        mySubject.remove(subjectId);
-    }
 
     private String inputSubjectId() {
         System.out.print("Please enter the subject ID: ");
@@ -235,7 +219,6 @@ public class SubjectService {
             switch (continuousOrGoBack) {
                 case "Y":
                     createSubject();
-//                    checkTrueFlase = false;
                     break;
                 case "N":
                     System.out.println("THIS IS YOUR MENU");
@@ -244,7 +227,7 @@ public class SubjectService {
             }
         } while (checkTrueFlase);
     }
-
+ 
     public Map<String, Subject> sortSubjectName(Set<String> subjectIds) {
         Map<String, Subject> subjectIdMapWithSubject = new HashMap<>();
 

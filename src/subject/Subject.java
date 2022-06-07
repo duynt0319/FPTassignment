@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package assesement.pkg01.subject;
+package subject;
 public class Subject {
     private String subjectId;
     private String subJectName;
@@ -38,11 +38,4 @@ public class Subject {
         this.credit = credit;
     }
 
-
-    @Override
-    public String toString() {
-        return "Subject{" + "subjectId=" + subjectId + ", subJectName=" + subJectName + ", credit=" + credit + '}';
-    }
-    
-    
 }

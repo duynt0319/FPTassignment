@@ -1,9 +1,9 @@
-package assesement.pkg01;
+package Main;
 
-import assesement.pkg01.grade.GradeService;
-import assesement.pkg01.report.ShowGradeService;
-import assesement.pkg01.student.StudentService;
-import assesement.pkg01.subject.SubjectService;
+import grade.GradeService;
+import report.ShowGradeService;
+import student.StudentService;
+import subject.SubjectService;
 
 import java.util.Scanner;
 
@@ -15,22 +15,22 @@ public class Main {
         StudentService studentService = new StudentService();
         SubjectService subjectService = new SubjectService();
         GradeService gradeService = new GradeService();
-        ShowGradeService soutGrade = new ShowGradeService();
+        ShowGradeService showGradeService = new ShowGradeService();
 
         int choice = 1;
-        while (choice >= 1 && choice <= 9) {
+        while (choice >= 1 && choice <= 8) {
             showMenu();
             do {
                 try {
                     Scanner sc = new Scanner(System.in);
                     choice = sc.nextInt();
-                    if (choice >= 1 && choice <= 9) {
+                    if (choice >= 1 && choice <= 8) {
                         break;
                     } else {
                         throw new Exception();
                     }
                 } catch (Exception e) {
-                    System.out.println("Your choice is not a number or out of range 1 to 7!");
+                    System.out.println("Your choice is not a number or out of range 1 to 8!");
                     System.out.print("Please choose a number from 1 to 8: ");
                 }
             } while (true);
@@ -40,42 +40,29 @@ public class Main {
                     studentService.createStudent();
                     studentService.showContinueCreating();
                     break;
-
                 case 2 :
                     studentService.updatingStudent();
                     break;
-
                 case 3 :
                     subjectService.createSubject();
                     subjectService.showContinuteCreating();
                     break;
-
                 case 4 :
                     subjectService.updatingSubject();
                     break;
-
                 case 5 :
-                    gradeService.enterStudentGrade();
-                    gradeService.test();
+                    gradeService.enterStudentGrade();      
                     break;
-
                 case 6 :
-                    soutGrade.studentGradeReport();
+                    showGradeService.studentGradeReport();
                     break;
-
                 case 7 :
-                    soutGrade.subjectGradeReport();
+                    showGradeService.subjectGradeReport();
                     break;
-
                 case 8 :
-                    System.out.println("Completed program, see u again!");
-                    break;
-
-                case 9 :
+//                    System.out.println("Completed program, see u again!");
+//                    return;
                     studentService.showStudent();
-                    subjectService.showSubject();
-                    gradeService.showGrade();
-
             }
         }
     }

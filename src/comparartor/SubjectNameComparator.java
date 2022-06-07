@@ -1,6 +1,6 @@
-package assesement.pkg01.comparartor;
+package comparartor;
 
-import assesement.pkg01.subject.Subject;
+import subject.Subject;
 
 import java.util.Comparator;
 import java.util.Map;
@@ -13,8 +13,8 @@ public class SubjectNameComparator implements Comparator<String> {
     }
 
     @Override
-    public int compare(String o1, String o2) {
-        return subjectIdMapWithSubject.get(o1).getSubJectName()
-                .compareTo(subjectIdMapWithSubject.get(o2).getSubJectName());
+    public int compare(String key1, String key2) {
+        return subjectIdMapWithSubject.get(key1).getSubJectName()
+                .compareTo(subjectIdMapWithSubject.get(key2).getSubJectName());
     }
 }

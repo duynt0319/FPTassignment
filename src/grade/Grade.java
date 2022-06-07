@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package assesement.pkg01.grade;
+package grade;
 public class Grade {
     private double labs;
     private double progressTest;
@@ -38,10 +38,6 @@ public class Grade {
         this.finalExam = finalExam;
     }
     
-    @Override
-    public String toString() {
-        return "StudentSubject{" + "labs=" + labs + ", progressTest=" + progressTest + ", finalExam=" + finalExam + '}';
-    }
     public double getAverage(){
         return this.finalExam * 0.4 + this.labs * 0.3 + this.progressTest * 0.3;
     }
