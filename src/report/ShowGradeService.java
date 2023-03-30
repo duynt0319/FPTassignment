@@ -56,7 +56,7 @@ public class ShowGradeService {
             Map<String, Grade> subjectsAndGradeByStudentID = gradeService.getSubjectsNameAndGradeByStudentID(studentIdInput);
             Map<String, Subject> sortBySubjectName = subjectService
                     .sortSubjectName(subjectsAndGradeByStudentID.keySet());
-            
+
             System.out.println("-StudentID " + studentIdInput);
             System.out.println("-Student name: " + studentService.getFNameAndLNameOfStudentById(studentIdInput));
             System.out.println("List of subject sort by Subject Name:");
@@ -88,18 +88,18 @@ public class ShowGradeService {
                 System.out.println("Subject does not exist!");
                 return;
             }
-            Map<String, Grade> studentIdAndStudentNameBySubjectID = gradeService.getStudentIdAndStudentNameBySubjectID(subjectIdInput);
+            Map<String, Grade> studentIdAndStudentNameBySubjectID = gradeService.getStudentIdAndGradeBySubjectID(subjectIdInput);
             Map<String, String> sortByStudentName = studentService.sortByStudentName(studentIdAndStudentNameBySubjectID.keySet());
-            
+
             if (studentIdAndStudentNameBySubjectID.isEmpty()) {
                 System.out.println("No students have taken " + subjectIdInput + " yet! please try again!");
                 return;
             }
 
             System.out.println("-SubjectID: " + subjectIdInput);
-            System.out.println("-Subject name: " + subjectService.getSubjectNameBySubjectId(subjectIdInput));
-            System.out.println("|++Student ID++|++++++Student name++++++|++Average mark++|++Status++|");
+            System.out.println("-Subject name: " + subjectService.getNameOfSubjectById(subjectIdInput));
             System.out.println("List of Student sort by Student Name:");
+            System.out.println("|++Student ID++|++++++Student name++++++|++Average mark++|++Status++|");
 
             for (String studentId : sortByStudentName.keySet()) {
                 System.out.format("|%14s|%24s|%9.2f       |%10s|\n",

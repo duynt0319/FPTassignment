@@ -3,11 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Workshop/Assesement_011/src/assesement/pkg01/Main.java</file>
-            <file>file:/D:/Workshop/Assesement_011/src/assesement/pkg01/GradeService.java</file>
-            <file>file:/D:/Workshop/Assesement_011/src/assesement/pkg01/StudentService.java</file>
-            <file>file:/D:/Workshop/Assesement_011/src/assesement/pkg01/Grade.java</file>
-            <file>file:/D:/Workshop/Assesement_011/src/assesement/pkg01/SubjectService.java</file>
+            <file>file:/D:/Workshop/lab1CuaDuy/src/subject/SubjectService.java</file>
+            <file>file:/D:/Workshop/lab1CuaDuy/src/student/StudentService.java</file>
+            <file>file:/D:/Workshop/lab1CuaDuy/src/Main/Main.java</file>
         </group>
     </open-files>
 </project-private>

@@ -38,4 +38,9 @@ public class Subject {
         this.credit = credit;
     }
 
+    @Override
+    public String toString() {
+        return "Subject(" + "subjectId: " + subjectId + " subJectName: " + subJectName + " credit:" + credit + ')'+ "\n";
+    }
+ 
 }

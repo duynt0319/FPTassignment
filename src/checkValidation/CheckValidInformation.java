@@ -4,9 +4,7 @@
  */
 package checkValidation;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.Calendar;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
@@ -18,124 +16,86 @@ public class CheckValidInformation {
 
     private Scanner sc = new Scanner(System.in);
 
-    public boolean checkStudentIdValid(String studentId) {
+    public boolean checkIsStudentIdValid(String studentId) {
         String regexStudentId = "[A-Z]{2}[0-9]{6}";
         boolean isMatches = Pattern.compile(regexStudentId).matcher(studentId).matches();
         return isMatches;
     }
 
-    private String inputFirstName() {
-        String firstName;
-        boolean flag;
-        do {
-            System.out.print("Please input student's first name: ");
-            firstName = sc.nextLine();
-            if (firstName == null || firstName.isEmpty()) {
-                System.out.println("your input must be valid! Please input first name again!!");
-                flag = true;
-            } else {
-                break;
+    public boolean checkIsPhoneValid(String phoneNumber) {
+        if ((phoneNumber.length() < 9 || phoneNumber.length() > 12) || phoneNumber.charAt(0) != '0') {
+            return false;
+        }
+        for (int i = 0; i < phoneNumber.length(); i++) {
+            if (phoneNumber.charAt(i) < 48 || phoneNumber.charAt(i) > 57) {
+                return false;
             }
-        } while (flag);
-        return firstName;
+        }
+        return true;
+    }
+    private boolean checkYearValid(int year) {
+        //get current year, month, day
+        int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+
+        return !(year > currentYear || year < 1900);
     }
 
-    private String inpuLastName() {
-
-        String lastName;
-        boolean flag;
-        do {
-            System.out.print("Please input student's last name: ");
-            lastName = sc.nextLine();
-            if (lastName == null || lastName.isEmpty()) {
-                System.out.println("your input must be valid! Please input last name again!!");
-                flag = true;
-            } else {
-                break;
-            }
-        } while (flag);
-        return lastName;
+    private boolean checkMonthValid(int month) {
+        return !(month > 12 || month < 1);
     }
 
-    private String inputGender() {
-        boolean flag;
-        do {
-            System.out.println("Please input student's gender: (Male or Female)");
-            System.out.print("Please choose (M/F): ");
-            String choose = sc.nextLine().toUpperCase();
-            if (choose == null || choose.isEmpty()) {
-                System.out.println("your input must be valid! Please input last name again!!");
-                flag = true;
-            } else {
-                switch (choose) {
-                    case "M":
-                        return "Male";
-                    case "F":
-                        return "Female";
-                    default:
-                        System.out.println("Please choose again!!");
-                        flag = true;
+    private boolean IsNamNhuan(int year) {
+        if (year % 400 == 0) {
+            return true;
+        } else {
+            return year % 4 == 0 && year % 100 != 0;
+        }
+    }
+
+    public boolean checkIsValidDate(int year, int month, int day) {
+        if(!checkYearValid(year)){
+            return false;
+        }
+        if(!checkMonthValid(month)){
+            return false;
+        }
+        switch (month) {
+            case 1:
+            case 3:
+            case 5:
+            case 7:
+            case 8:
+            case 10:
+            case 12:
+                // day 31
+                if (day > 31 || day <= 0) {
+                    return false;
                 }
-            }
-        } while (flag);
-        return null;
-    }
-
-    private Date validDate() {
-        Date date = new Date();
-
-        Date currentDate = new Date();
-        boolean isInputCorrectDate = true;
-        do {
-            try {
-                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
-                System.out.print("Please input a date of birth student: format:(dd/MM/yyyy): ");
-                String input = sc.nextLine();
-                date = simpleDateFormat.parse(input);
-
-                if (date.after(currentDate)) {
-                    System.out.println("Please input date before current date");
+                break;
+            case 4:
+            case 6:
+            case 9:
+            case 11:
+                //day 30
+                if (day > 30 || day <= 0) {
+                    return false;
+                }
+                break;
+            case 2:
+                if (IsNamNhuan(year)) {
+                    if (day > 29 || day <= 0) {
+                        return false;
+                    }
                 } else {
-                    isInputCorrectDate = false;
+                    if (day > 28 | day <= 0) {
+                        return false;
+                    }
                 }
-
-            } catch (ParseException e) {
-                System.out.println("your input must be valid! Please input again!!");
-            }
-        } while (isInputCorrectDate);
-
-        return date;
-    }
-
-    
-        private  String inputEmail() {
-        String regexPattern = "^(.+)@(\\S+)$";
-        String email;
-        while (true) {        
-            System.out.print("Please input your email: ");
-            email = sc.nextLine();
-            boolean isMatches = Pattern.compile(regexPattern)
-                    .matcher(email)
-                    .matches();
-            
-            if (!isMatches || email.trim().equals(" ")) {
-                System.out.println("your input is wrong! Please input your email again!: ");
-            }else{
                 break;
-            }
+            default:
+                break;
         }
-        return email;
-    }
-
-    private String inputPhoneNumber() {
-        String phoneNumber;
-        System.out.print("Please input student's phone number: ");
-        phoneNumber = sc.nextLine();
-        while (phoneNumber.length() < 9 || phoneNumber.length() > 12 || phoneNumber.charAt(0) != '0' || phoneNumber.trim().equals(" ")) {
-            System.out.print("your input is wrong! Please try again!: ");
-            phoneNumber = sc.nextLine();
-        }
-        return phoneNumber;
+        return true;
     }
     
 }

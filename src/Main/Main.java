@@ -60,9 +60,9 @@ public class Main {
                     showGradeService.subjectGradeReport();
                     break;
                 case 8 :
-//                    System.out.println("Completed program, see u again!");
-//                    return;
-                    studentService.showStudent();
+                    System.out.println("Completed program, see u again!");
+                    return;
+//                    studentService.showStudent();
             }
         }
     }

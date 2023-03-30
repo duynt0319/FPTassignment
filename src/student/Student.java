@@ -4,7 +4,7 @@
  */
 package student;
 
-
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -13,6 +13,7 @@ import java.util.Date;
  */
 public class Student {
 
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
     private String studentId;
     private String firstName;
     private String lastName;
@@ -20,7 +21,7 @@ public class Student {
     private Date dateOfBirth;
     private String email;
     private String phoneNumber;
- 
+
     public Student(String studentId, String firstName, String lastName, String gender, Date dateOfBirth, String email, String phoneNumber) {
         this.studentId = studentId;
         this.firstName = firstName;
@@ -89,7 +90,7 @@ public class Student {
 
     @Override
     public String toString() {
-        return "Student{" + "studentId=" + studentId + ", firstName=" + firstName + ", lastName=" + lastName + ", gender=" + gender + ", dateOfBirth=" + dateOfBirth + ", email=" + email + ", phoneNumber=" + phoneNumber + '}' + "\n";
+        return "Student(" + "studentId=" + studentId + ", firstName=" + firstName + ", lastName=" + lastName + ", gender=" + gender + ", dateOfBirth=" + simpleDateFormat.format(dateOfBirth) + ", email=" + email + ", phoneNumber=" + phoneNumber + ')' + "\n";
     }
-    
+
 }

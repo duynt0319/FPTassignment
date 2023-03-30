@@ -41,5 +41,11 @@ public class Grade {
     public double getAverage(){
         return this.finalExam * 0.4 + this.labs * 0.3 + this.progressTest * 0.3;
     }
+
+    @Override
+    public String toString() {
+        return "Grade(" + "labs: " + labs + " progressTest: " + progressTest + " finalExam: " + finalExam + ')'+"\n";
+    }
+    
     
 }

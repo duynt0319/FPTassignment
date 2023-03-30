@@ -19,7 +19,6 @@ public class SubjectService {
     private static Map<String, Subject> mySubject = new HashMap<>();
     private Scanner sc = new Scanner(System.in);
 
-
     CheckValidInformation checkValidInformation = new CheckValidInformation();
 
     public String getNameOfSubjectById(String subjectID) {
@@ -27,10 +26,6 @@ public class SubjectService {
         return subject.getSubJectName();
     }
 
-
-    public String getSubjectNameBySubjectId(String subjectId) {
-        return mySubject.get(subjectId).getSubJectName();
-    }
 
     //function3
     public void createSubject() {
@@ -45,6 +40,7 @@ public class SubjectService {
 
         mySubject.put(subjectId, subject);
         System.out.println("Created success!");
+        System.out.println(mySubject);
     }
 
     private String inputIdSubject() {
@@ -126,6 +122,10 @@ public class SubjectService {
             }
         }
     }
+    private void removeSubject(String subjectId) {
+        mySubject.remove(subjectId);
+    }
+    
     public void confirmDelete(String subjectId) {
         System.out.println("Do you really want to delete this subject (Y/N)");
         System.out.print("Please choose (Y/N): ");
@@ -133,7 +133,9 @@ public class SubjectService {
         final GradeService gradeService = new GradeService();
         switch (choose) {
             case "Y":
+                removeSubject(subjectId);
                 gradeService.removeSubject(subjectId);
+                
                 System.out.println("Delete success");
                 backToTheUpdateMenu();
 
@@ -157,7 +159,6 @@ public class SubjectService {
         return mySubject.containsKey(subjectId);
     }
 
-
     private String inputSubjectId() {
         System.out.print("Please enter the subject ID: ");
         String inputId = sc.nextLine().toUpperCase();
@@ -170,12 +171,51 @@ public class SubjectService {
         return option;
     }
 
-    private void updateSubject(String Id) {
-        String subjectName = inputSubjectName();
-        int credit = inputCredit();
-        Subject subject = new Subject(Id, subjectName, credit);
-        mySubject.put(Id, subject);
+    private String inputSubjectNameForUpdate() {
+        String name;
+        System.out.print("Please input subject name: ");
+        name = sc.nextLine();
+        return name;
+    }
+
+    private int inputCreditForUpdate(String studentId) {
+        int credit = 0;
+        do {
+
+            System.out.print("Please input credit: ");
+            try {
+                credit = Integer.parseInt(sc.nextLine());
+            } catch (Exception e) {
+                System.out.println("keep old value");
+                credit = mySubject.get(studentId).getCredit();
+                System.out.println(credit);
+            }
+            if (credit >= 0 && credit <= 10) {
+                break;
+            } else {
+                System.out.println("input credit from 1-10!");
+            }
+        } while (true);
+        return credit;
+    }
+    public void showSubjetc(){
+        System.out.println(mySubject);
+    }
+    private void updateSubject(String studentId) {
+
+        String subjectName = inputSubjectNameForUpdate();
+        if (subjectName.trim().equals("")) {
+            System.out.println("Keep old value");
+            mySubject.get(studentId).getSubJectName();
+            System.out.println(mySubject.get(studentId).getSubJectName());
+        }
+        int credit = inputCreditForUpdate(studentId);
+
+        Subject subject = new Subject(studentId, subjectName, credit);
+        mySubject.put(studentId, subject);
+        
         System.out.println("Update successfully!");
+        System.out.println(mySubject);
     }
 
     private void miniMenuForUpdateSubject() {
@@ -190,6 +230,11 @@ public class SubjectService {
         System.out.println("Do you want to go back to the ''update menu''?");
         System.out.print("Please choose (Y/N): ");
         String chooseBackToTheUpdateMenu = sc.nextLine().toUpperCase();
+        while (!chooseBackToTheUpdateMenu.equals("Y") && !chooseBackToTheUpdateMenu.equals("N")) {
+            System.out.println("Do you want to go back to the ''update menu''?");
+            System.out.print("Please choose (Y/N): ");
+            chooseBackToTheUpdateMenu = sc.nextLine().toUpperCase();
+        }
         return chooseBackToTheUpdateMenu;
     }
 
@@ -227,16 +272,16 @@ public class SubjectService {
             }
         } while (checkTrueFlase);
     }
- 
+
     public Map<String, Subject> sortSubjectName(Set<String> subjectIds) {
         Map<String, Subject> subjectIdMapWithSubject = new HashMap<>();
 
-        for (String subjectId: subjectIds) {
+        for (String subjectId : subjectIds) {
             subjectIdMapWithSubject.put(subjectId, mySubject.get(subjectId));
         }
         SubjectNameComparator subjectNameComparator = new SubjectNameComparator(subjectIdMapWithSubject);
-        TreeMap<String, Subject> sortedBySubjectName = new TreeMap<>(subjectNameComparator);
-        sortedBySubjectName.putAll(subjectIdMapWithSubject);
-        return sortedBySubjectName;
+        TreeMap<String, Subject> sortedSubjectNameByTreeMap = new TreeMap<>(subjectNameComparator);
+        sortedSubjectNameByTreeMap.putAll(subjectIdMapWithSubject);
+        return sortedSubjectNameByTreeMap;
     }
 }

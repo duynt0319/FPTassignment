@@ -24,11 +24,7 @@ public class GradeService {
         return studentIdMapWithSubjectIdMapWithGrade.get(studentID);
     }
 
-    public boolean checkIsGradeExist(String subjectID) {
-        return studentIdMapWithSubjectIdMapWithGrade.containsKey(subjectID);
-    }
-
-    public Map<String, Grade> getStudentIdAndStudentNameBySubjectID(String subjectID) {
+    public Map<String, Grade> getStudentIdAndGradeBySubjectID(String subjectID) {
         Map<String, Grade> map = new HashMap<>();
         for (String studentId : studentIdMapWithSubjectIdMapWithGrade.keySet()) {
             Map<String, Grade> subjectWithGrade = studentIdMapWithSubjectIdMapWithGrade.get(studentId);
@@ -38,6 +34,10 @@ public class GradeService {
             }
         }
         return map;
+    }
+
+    public boolean checkIsGradeExist(String studentId) {
+        return studentIdMapWithSubjectIdMapWithGrade.containsKey(studentId);
     }
 
     public Double getAverageBySubjectId(String studentId, String subjectId) {
@@ -50,7 +50,6 @@ public class GradeService {
         }
         return "Not pass!";
     }
-
 
     private String inputStudentId() {
 
@@ -78,7 +77,6 @@ public class GradeService {
         return studentIdMapWithSubjectIdMapWithGrade.containsKey(studentId);
     }
 
-
     public void enterStudentGrade() {
 
         String studentIdInput = inputStudentId().toUpperCase();
@@ -103,6 +101,7 @@ public class GradeService {
         enterNewGrade(studentIdInput, subjectIdInput);
 
     }
+
     private boolean isOverWritingGradeOrNot() {
         System.out.println("Your Grade is already EXIST! Do you want overwrite it or not?"
                 + "(Y/N): ");
@@ -193,22 +192,22 @@ public class GradeService {
 
         subjectIdMapWithGrade.put(subjectId, grade);
         studentIdMapWithSubjectIdMapWithGrade.put(studentId, subjectIdMapWithGrade);
+        System.out.println(studentIdMapWithSubjectIdMapWithGrade);
     }
 
     public void overWriteGrade(String studentId, String subjectId) {
         boolean choice = isOverWritingGradeOrNot();
         if (choice == true) {
-            Map<String, Grade> subjectIdMapWithGrade = studentIdMapWithSubjectIdMapWithGrade.get(studentId);
 
             double labs = inputGradeOfLabs();
             double progressTest = inputGradeOfProgessTests();
             double finalExam = inputGradeOfFinalExam();
             Grade gradeOverWrite = new Grade(labs, progressTest, finalExam);
 
+            Map<String, Grade> subjectIdMapWithGrade = studentIdMapWithSubjectIdMapWithGrade.get(studentId);
             subjectIdMapWithGrade.put(subjectId, gradeOverWrite);
-
             studentIdMapWithSubjectIdMapWithGrade.put(studentId, subjectIdMapWithGrade);
-
+            System.out.println(studentIdMapWithSubjectIdMapWithGrade);
         }
     }
 
@@ -217,7 +216,7 @@ public class GradeService {
     }
 
     public void removeSubject(String subjectId) {
-        for (String studentId: studentIdMapWithSubjectIdMapWithGrade.keySet()) {
+        for (String studentId : studentIdMapWithSubjectIdMapWithGrade.keySet()) {
             studentIdMapWithSubjectIdMapWithGrade.get(studentId).remove(subjectId);
         }
     }
